@@ -1,6 +1,8 @@
 # ShellWindows Process create to get explorer.exe as parent process
+# nothing fancy, just 3 iterations of xor and then base64 encoded so the bytes can be transported into a static file (your macro) :)
+# tested on up to date defender, but your amsi bypass and rev shell dropper will need obfusction as well
 # built this for OSEP challenge
-#more macro techniques here: https://github.com/S3cur3Th1sSh1t/OffensiveVBA
+# more macro techniques here: https://github.com/S3cur3Th1sSh1t/OffensiveVBA
 import random
 import string
 import base64
