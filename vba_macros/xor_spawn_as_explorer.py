@@ -115,6 +115,12 @@ Public Function {zb}({za})
     {zb} = {z}
 End Function
 
+Sub Document_Open()
+ main
+End Sub
+Sub AutoOpen()
+ main
+End Sub
 
 Sub main()
 
