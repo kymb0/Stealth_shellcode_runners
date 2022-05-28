@@ -1,5 +1,5 @@
 # built for OSEP challenges
-# techniques heavil;y drawn from SLAE, deff check that curse out if you have not already :)
+# techniques heavily drawn from SLAE, deff check that course out if you have not already :)
 # Author: kymb0
 #!/usr/bin/python
 import sys
