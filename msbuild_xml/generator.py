@@ -1,3 +1,5 @@
+# Author: kymb0
+
 import os
 import random
 import string
