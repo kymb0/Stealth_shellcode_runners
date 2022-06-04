@@ -53,7 +53,7 @@ decode:
     loop decode
 meat:
     call decoder
-    potatoes: db {encoded2}
+    potatoes: db {encoded}
 
 '''
 nasm_compiler = '''
