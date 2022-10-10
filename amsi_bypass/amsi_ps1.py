@@ -79,8 +79,15 @@ xoredBytesE = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredE))
 xoredBytesF = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredF))
 xoredBytesG = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredG))
 xoredBytesH = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredH))
+xoredBytesI = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredI))
+xoredBytesJ = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredJ))
+xoredBytes1 = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xored1))
+xoredBytesK = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredK))
+xoredBytesL = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredL))
+xoredBytesM = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredM))
+xoredBytesN = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredN))
+xoredBytesO = ('0x' + ', 0x'.join(hex(ord(x))[2:] for x in xoredO))
 xorkeyBytes = ('0x'.join(hex(ord(x))[:] for x in xorkey))
-
 
 ps1 = f'''
 function {a} {{
