@@ -1,6 +1,7 @@
 # author: kymb0
 # if you get Crypto module errors: pip3 uninstall crypto > pip3 install pycryptodome
 # method 1 no longer works oopsie
+# neither does 2, this script is ded (for now)
 
 
 
