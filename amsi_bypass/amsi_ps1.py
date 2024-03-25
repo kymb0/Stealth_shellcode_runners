@@ -1,3 +1,8 @@
+#author: kymb0
+#if you get Crypto module errors: pip3 uninstall crypto > pip3 install pycryptodome
+
+
+
 import random
 import string
 from Crypto.Cipher import AES
